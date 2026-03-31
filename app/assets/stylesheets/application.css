@@ -1,0 +1,61 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+/* User dropdown menu styling */
+.user-menu .dropdown-menu {
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-header {
+  padding: 20px;
+  text-align: center;
+}
+
+.user-header p {
+  margin: 10px 0 0 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.user-header small {
+  font-size: 12px;
+  opacity: 0.9;
+  display: block;
+  margin-top: 5px;
+}
+
+.user-body {
+  border-bottom: 1px solid #eee;
+  padding: 15px;
+}
+
+.user-footer {
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+.user-footer .btn {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.user-footer .btn-flat {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  color: #6c757d;
+}
+
+.user-footer .btn-flat:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+  color: #495057;
+}

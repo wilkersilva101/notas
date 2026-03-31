@@ -1,0 +1,212 @@
+# encoding: UTF-8
+pt-BR:
+  # ActiveRecord - Atributos dos Modelos
+  activerecord:
+    models:
+      user:
+        one: "Usuário"
+        other: "Usuários"
+      post:
+        one: "Nota"
+        other: "Notas"
+    attributes:
+      user:
+        id: "ID"
+        email: "Email"
+        username: "Nome de Usuário"
+        password: "Senha"
+        password_confirmation: "Confirmação da Senha"
+        current_password: "Senha Atual"
+        remember_me: "Lembrar-me"
+        role: "Perfil"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      post:
+        id: "ID"
+        titulo: "Título"
+        descricao: "Descrição"
+        user_id: "Autor"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+    enums:
+      user:
+        role:
+          basic: "Básico"
+          admin: "Administrador"
+
+  # Views - Títulos e Cabeçalhos
+  views:
+    posts:
+      index:
+        title: "Lista de Notas"
+        header: "Notas"
+        list: "Listar Notas"
+        new: "Nova Nota"
+        search_placeholder: "Buscar por título..."
+        no_records: "Nenhuma nota encontrada."
+        first_record: "Criar primeira nota"
+      new:
+        title: "Nova Nota"
+        header: "Nova Nota"
+      edit:
+        title: "Editar Nota"
+        header: "Editar Nota"
+      show:
+        title: "Detalhes da Nota"
+        header: "Detalhes"
+    users:
+      index:
+        title: "Lista de Usuários"
+        header: "Usuários"
+        list: "Listar Usuários"
+        search_placeholder: "Buscar por email..."
+        no_records: "Nenhum usuário encontrado."
+      new:
+        title: "Novo Usuário"
+        header: "Novo Usuário"
+      edit:
+        title: "Editar Usuário"
+        header: "Editar Usuário"
+      show:
+        title: "Detalhes do Usuário"
+        header: "Detalhes"
+    common:
+      actions: "Ações"
+      search: "Buscar"
+      save: "Salvar"
+      cancel: "Cancelar"
+      back: "Voltar"
+      edit: "Editar"
+      delete: "Excluir"
+      view: "Ver"
+      confirm_delete: "Tem certeza que deseja excluir?"
+      created_at: "Criado em"
+      updated_at: "Atualizado em"
+      welcome_message: "Bem-vindo ao sistema de notas!"
+      logout: "Sair"
+      login: "Entrar"
+      register: "Cadastrar"
+      settings: "Configurações"
+      all_rights_reserved: "Todos os direitos reservados."
+
+  # Flash Messages
+  flash:
+    posts:
+      create:
+        notice: "Nota criada com sucesso."
+      update:
+        notice: "Nota atualizada com sucesso."
+      destroy:
+        notice: "Nota excluída com sucesso."
+        alert: "Não foi possível excluir a nota."
+    users:
+      update:
+        notice: "Usuário atualizado com sucesso."
+      destroy:
+        notice: "Usuário excluído com sucesso."
+        alert: "Não foi possível excluir o usuário."
+        self_delete_forbidden: "Você não pode excluir seu próprio usuário."
+
+  # Breadcrumbs
+  breadcrumbs:
+    home: "Início"
+    posts: "Notas"
+    users: "Usuários"
+    new: "Novo"
+    edit: "Editar"
+    show: "Visualizar"
+
+  # Formulários e Validações
+  errors:
+    template:
+      header:
+        one: "1 erro impediu este registro de ser salvo:"
+        other: "%{count} erros impediram este registro de ser salvo:"
+    messages:
+      blank: "não pode ficar em branco"
+      taken: "já está em uso"
+      too_short: "é muito curto (mínimo: %{count} caracteres)"
+      too_long: "é muito longo (máximo: %{count} caracteres)"
+      invalid: "não é válido"
+      confirmation: "não confere"
+
+  # Devise (para complementar)
+  devise:
+    failure:
+      already_authenticated: "Você já está autenticado."
+      inactive: "Sua conta ainda não foi ativada."
+      invalid: "%{authentication_keys} ou senha inválidos."
+      locked: "Sua conta está bloqueada."
+      last_attempt: "Você tem mais uma tentativa antes que sua conta seja bloqueada."
+      not_found_in_database: "%{authentication_keys} ou senha inválidos."
+      timeout: "Sua sessão expirou. Por favor, faça login novamente para continuar."
+      unauthenticated: "Você precisa fazer login ou se cadastrar antes de continuar."
+      unconfirmed: "Você precisa confirmar sua conta antes de continuar."
+    sessions:
+      signed_in: "Login realizado com sucesso."
+      signed_out: "Logout realizado com sucesso."
+      already_signed_out: "Logout realizado com sucesso."
+      new:
+        title: "Login"
+        header: "Entrar"
+        email: "Email"
+        password: "Senha"
+        remember_me: "Lembrar-me"
+        submit: "Entrar"
+    passwords:
+      no_token: "Você não pode acessar esta página sem estar logado."
+      send_instructions: "Você receberá um email com instruções sobre como redefinir sua senha em alguns minutos."
+      send_paranoid_instructions: "Se o seu email existir em nosso banco de dados, você receberá um link de recuperação de senha em alguns minutos."
+      updated: "Sua senha foi alterada com sucesso. Você está logado."
+      updated_not_active: "Sua senha foi alterada com sucesso."
+      edit:
+        title: "Redefinir Senha"
+        header: "Redefinir Senha"
+        password: "Nova Senha"
+        password_confirmation: "Confirme a Nova Senha"
+        submit: "Alterar Senha"
+      new:
+        title: "Esqueceu sua senha?"
+        header: "Recuperar Senha"
+        email: "Email"
+        submit: "Enviar instruções"
+    confirmations:
+      send_instructions: "Você receberá um email com instruções sobre como confirmar sua conta em alguns minutos."
+      send_paranoid_instructions: "Se o seu email existir em nosso banco de dados, você receberá um email com instruções sobre como confirmar sua conta em alguns minutos."
+      confirmed: "Sua conta foi confirmada com sucesso."
+    registrations:
+      signed_up: "Cadastro realizado com sucesso. Bem-vindo!"
+      signed_up_but_inactive: "Você se cadastrou com sucesso. No entanto, não podemos fazer login porque sua conta ainda não está ativada."
+      signed_up_but_locked: "Você se cadastrou com sucesso. No entanto, não podemos fazer login porque sua conta está bloqueada."
+      signed_up_but_unconfirmed: "Uma mensagem com um link de confirmação foi enviada para seu email. Por favor, abra o link para ativar sua conta."
+      update_needs_confirmation: "Você atualizou sua conta com sucesso, mas precisamos verificar seu novo email. Por favor, verifique seu email e clique no link de confirmação."
+      updated: "Sua conta foi atualizada com sucesso."
+      destroyed: "Sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve."
+      new:
+        title: "Cadastrar"
+        header: "Novo Cadastro"
+        email: "Email"
+        password: "Senha"
+        password_confirmation: "Confirme a Senha"
+        submit: "Cadastrar"
+      edit:
+        title: "Editar Perfil"
+        header: "Editar Perfil"
+        change_password: "Alterar Senha"
+        password_hint: "Deixe em branco se não desejar alterar a senha"
+        confirm_changes: "Confirmação"
+        current_password_hint: "Precisamos da sua senha atual para confirmar as alterações"
+        cancel_account: "Cancelar Conta"
+        cancel_account_warning: "Não está feliz?"
+        cancel_account_button: "Cancelar minha conta"
+        cancel_confirm: "Tem certeza que deseja cancelar sua conta? Esta ação não pode ser desfeita."
+        member_since: "Membro desde"
+        pending_confirmation: "Aguardando confirmação para"
+    shared:
+      links:
+        login: "Entrar"
+        register: "Cadastrar"
+        forgot_password: "Esqueceu sua senha?"
+        confirmation_instructions: "Não recebeu instruções de confirmação?"
+        unlock_instructions: "Não recebeu instruções de desbloqueio?"
+        sign_in_with: "Entrar com %{provider}"

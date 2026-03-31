@@ -1,0 +1,768 @@
+  [1m[35m (6.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS `notas_test`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE DATABASE `notas_test` DEFAULT COLLATE `utf8mb4_unicode_ci`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS `exception_tracks` CASCADE[0m
+  [1m[35m (51.1ms)[0m  [1m[35mCREATE TABLE `exception_tracks` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `body` mediumtext, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `nota` CASCADE[0m
+  [1m[35m (78.6ms)[0m  [1m[35mCREATE TABLE `nota` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `titulo` varchar(255), `descricao` text, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_nota_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `posts` CASCADE[0m
+  [1m[35m (32.2ms)[0m  [1m[35mCREATE TABLE `posts` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `titulo` varchar(255), `descricao` text, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_posts_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (77.3ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `username` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, `role` varchar(255), UNIQUE INDEX `index_users_on_email` (`email`), UNIQUE INDEX `index_users_on_reset_password_token` (`reset_password_token`), UNIQUE INDEX `index_users_on_username` (`username`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `usuarios` CASCADE[0m
+  [1m[35m (38.1ms)[0m  [1m[35mCREATE TABLE `usuarios` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `username` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_usuarios_on_email` (`email`), UNIQUE INDEX `index_usuarios_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (228.3ms)[0m  [1m[35mALTER TABLE `nota` ADD CONSTRAINT `fk_rails_ca2298c254`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (135.3ms)[0m  [1m[35mALTER TABLE `posts` ADD CONSTRAINT `fk_rails_5b5ddfd518`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (41.8ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (13.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20260326145718)[0m
+  [1m[35m (5.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20260227182553),
+(20260224184456),
+(20260224182018),
+(20260224182005);[0m
+  [1m[35m (56.8ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (7.9ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'test', '2026-03-30 14:09:15.226945', '2026-03-30 14:09:15.226953')[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (7.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '91ee89a6a47f5e9039e6c1a10651b6badb35e02f', '2026-03-30 14:09:15.243380', '2026-03-30 14:09:15.243390')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('teste@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('teste@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('kris_friesen@schowalter-ebert.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (3.2ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('kris_friesen@schowalter-ebert.example', '$2a$04$QwrWJzWS6uEt4cthLQYnmujXkdvTS9RFHJg3tP83WcH5pmppQMkqC', NULL, NULL, NULL, 'louie.pacocha', '2026-03-30 17:59:08.927273', '2026-03-30 17:59:08.927273', 'basic')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (11.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('chantay_cremin@jenkins.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('chantay_cremin@jenkins.test', '$2a$04$b8rnyjXPcmntSOiKNpKDE.deWR4ptUlqAx3tIHEzYT6R2lU4bIEmy', NULL, NULL, NULL, 'vincenzo', '2026-03-30 17:59:08.992856', '2026-03-30 17:59:08.992856', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (11.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('roberto@pollich.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('roberto@pollich.test', '$2a$04$RlZYmu.S8rGl2JCOiw6CTuYt5mYYGoWRGs7S0vjpu7cdB5PKHEGgC', NULL, NULL, NULL, 'andra', '2026-03-30 17:59:09.018108', '2026-03-30 17:59:09.018108', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (14.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('johnny.dibbert@stanton-johnson.example' AS BINARY) LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('duplicate@example.com', '$2a$04$CCd.itdO33ArGnvzVJwWve96DsxUsVQVAi/nF7jpXLR1VW/MTTcOG', NULL, NULL, NULL, 'john', '2026-03-30 17:59:09.070095', '2026-03-30 17:59:09.070095', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mTRANSACTION (14.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('anh@baumbach.test' AS BINARY) LIMIT 1[0m
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('krystle_lockman@frami.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('krystle_lockman@frami.test', '$2a$04$cH9bhzyIiTmcbmFBRb1lduX.i9qxmIdQXa/lCQwA3TpZAXBkJDeK6', NULL, NULL, NULL, 'testuser', '2026-03-30 17:59:09.108758', '2026-03-30 17:59:09.108758', 'basic')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('maynard_kassulke@jacobi-littel.example' AS BINARY) LIMIT 1[0m
+  [1m[36mTRANSACTION (8.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('teresa@kassulke-beatty.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'henry.dickinson' LIMIT 1[0m
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('teresa@kassulke-beatty.example', '$2a$04$h0De7zxVTuI4BMIJw8kiIeMnV67TUvsrQqgi8llkzD4hoPFS1LFGm', NULL, NULL, NULL, 'henry.dickinson', '2026-03-30 17:59:36.571030', '2026-03-30 17:59:36.571030', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (7.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('maryalice.zboncak@reichel.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'lewis_murray' LIMIT 1[0m
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('maryalice.zboncak@reichel.example', '$2a$04$v/qU3tBjOxQr3PV0936PLuIPYPimql7t8xVgdz4mY301CMFpmnNli', NULL, NULL, NULL, 'lewis_murray', '2026-03-30 17:59:36.652306', '2026-03-30 17:59:36.652306', 'basic')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('jillian.rempel@wyman.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'bud' LIMIT 1[0m
+  [1m[36mUser Create (23.9ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('jillian.rempel@wyman.test', '$2a$04$wHCxGSfxfj78Bjm8O54D0exfy8VYjrjmHIMSuGkTq1j3IDYA3rDBG', NULL, NULL, NULL, 'bud', '2026-03-30 17:59:36.668279', '2026-03-30 17:59:36.668279', 'basic')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('tyrone_wiegand@larson-mraz.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'lamonica' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'elisabeth' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'noel_kuhn' LIMIT 1[0m
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('duplicate@example.com', '$2a$04$yb1a/EJolskcXqVhgisiweh.sXZetvMPqY0n.27NjYWZ/oszRmDoe', NULL, NULL, NULL, 'noel_kuhn', '2026-03-30 17:59:36.725236', '2026-03-30 17:59:36.725236', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'nigel_purdy' LIMIT 1[0m
+  [1m[36mTRANSACTION (5.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('samual@effertz.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'josefa' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('georgeanna@schinner.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('georgeanna@schinner.test', '$2a$04$ZO4K8Z7dpEm8dv.IYfaQFuHM4Oo1ezb9UN4u92jvZShE8OVVkufcq', NULL, NULL, NULL, 'testuser', '2026-03-30 17:59:36.754141', '2026-03-30 17:59:36.754141', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('janise@koss-huels.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('yolande_lang@nikolaus.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'silvia' LIMIT 1[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('yolande_lang@nikolaus.test', '$2a$04$GXf4J.tMmrmzLnk.xqk/6uheJ5wO6SDqu2U4GFJggwdjc3stjk7XW', NULL, NULL, NULL, 'silvia', '2026-03-30 18:06:18.954871', '2026-03-30 18:06:18.954871', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (11.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (5.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('frieda_russel@carter.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'julene' LIMIT 1[0m
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('frieda_russel@carter.test', '$2a$04$eU9YdoWsSawYBz2uF.BbrOiKRLag3HESKTfE/GVn5Ty3fmIxlgPsq', NULL, NULL, NULL, 'julene', '2026-03-30 18:06:19.029386', '2026-03-30 18:06:19.029386', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (5.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('eileen_vandervort@considine-wolff.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'adam' LIMIT 1[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('eileen_vandervort@considine-wolff.test', '$2a$04$CAfyTxZKcegjsKBcSR/df.cP3q9iTf4ROg/qnjIcK3kZyXERqwRx2', NULL, NULL, NULL, 'adam', '2026-03-30 18:06:19.048857', '2026-03-30 18:06:19.048857', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('page_ritchie@morissette-hahn.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'refugia_medhurst' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'tesha_strosin' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'alene' LIMIT 1[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('duplicate@example.com', '$2a$04$7j/iAAZ0ry3P0wVS3PBOLuHRepa3RrhChTQ8nIYQZ3hQNUMPLIIUi', NULL, NULL, NULL, 'alene', '2026-03-30 18:06:19.083617', '2026-03-30 18:06:19.083617', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'nathanael' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('emilio_hammes@kemmer.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'maryanna_heathcote' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('erlene_breitenberg@fadel.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('erlene_breitenberg@fadel.test', '$2a$04$yBGeY88pwMxNiLqG6.4oCeZ1Z4f4MULgY.SyJcgeq/GIy4vOJpyRe', NULL, NULL, NULL, 'testuser', '2026-03-30 18:06:19.114159', '2026-03-30 18:06:19.114159', 'basic')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('joy@weissnat.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[35m (232.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS `notas_test`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE `notas_test` DEFAULT COLLATE `utf8mb4_unicode_ci`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `exception_tracks` CASCADE[0m
+  [1m[35m (63.2ms)[0m  [1m[35mCREATE TABLE `exception_tracks` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `body` mediumtext, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `nota` CASCADE[0m
+  [1m[35m (63.7ms)[0m  [1m[35mCREATE TABLE `nota` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `titulo` varchar(255), `descricao` text, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_nota_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `posts` CASCADE[0m
+  [1m[35m (69.5ms)[0m  [1m[35mCREATE TABLE `posts` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `titulo` varchar(255), `descricao` text, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_posts_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (91.1ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `username` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, `role` varchar(255), UNIQUE INDEX `index_users_on_email` (`email`), UNIQUE INDEX `index_users_on_reset_password_token` (`reset_password_token`), UNIQUE INDEX `index_users_on_username` (`username`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `usuarios` CASCADE[0m
+  [1m[35m (56.0ms)[0m  [1m[35mCREATE TABLE `usuarios` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `username` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_usuarios_on_email` (`email`), UNIQUE INDEX `index_usuarios_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (294.9ms)[0m  [1m[35mALTER TABLE `nota` ADD CONSTRAINT `fk_rails_ca2298c254`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (192.8ms)[0m  [1m[35mALTER TABLE `posts` ADD CONSTRAINT `fk_rails_5b5ddfd518`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (30.3ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (8.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20260330182643)[0m
+  [1m[35m (7.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20260326145718),
+(20260227182553),
+(20260224184456),
+(20260224182018),
+(20260224182005);[0m
+  [1m[35m (35.5ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (11.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'test', '2026-03-30 19:24:07.374330', '2026-03-30 19:24:07.374342')[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.7ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '28351cafa0349d882fa1c126efdc8b13e14bd318', '2026-03-30 19:24:07.392786', '2026-03-30 19:24:07.392797')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('cathrine@luettgen.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'diego' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('cathrine@luettgen.example', '$2a$04$U96ObOC2j8cniZP00OcBvubdHUTXbuk.IPalZq5nW5H85WMtfx95a', NULL, NULL, NULL, 'diego', '2026-03-30 19:24:07.684120', '2026-03-30 19:24:07.684120', 'basic')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (5.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('ryan@fay.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'ligia' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('ryan@fay.example', '$2a$04$xh5GImlncc/if9MAOmOeHepl2Imbu..9Pi6L9cPYZVjAlbvBX6Qy6', NULL, NULL, NULL, 'ligia', '2026-03-30 19:24:07.751398', '2026-03-30 19:24:07.751398', 'basic')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('sammy_oberbrunner@leannon.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'gertrud_pacocha' LIMIT 1[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('sammy_oberbrunner@leannon.example', '$2a$04$0pT2DfZyuwy9kp.TKOq4qejcFsG21pC.uaDMIjdlc1z9fxrfwXmzO', NULL, NULL, NULL, 'gertrud_pacocha', '2026-03-30 19:24:07.767783', '2026-03-30 19:24:07.767783', 'basic')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('fermin.goldner@sauer-batz.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'tod' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('fermin.goldner@sauer-batz.test', '$2a$04$C3YDD.7CyOa6kFgCXTiOYeySSRsNNqL.DmiGQq4dX8fRNgCQZ/W0u', NULL, NULL, NULL, 'tod', '2026-03-30 19:26:59.935690', '2026-03-30 19:26:59.935690', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (8.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (43.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('sanora@wyman.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'alec_glover' LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('sanora@wyman.example', '$2a$04$tWkRN6GIkerQ0wv5rdQCMuhSpeK/qwO7UJmym5jwI.lFxq3lYYEv2', NULL, NULL, NULL, 'alec_glover', '2026-03-30 19:27:00.048367', '2026-03-30 19:27:00.048367', 'basic')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('selma@feeney-bahringer.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'easter' LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('selma@feeney-bahringer.test', '$2a$04$Czxq75oi0hnjVqtIVC6Aae.mqP.9xvgA0oVqlvg4kTyNQbcH5X5mS', NULL, NULL, NULL, 'easter', '2026-03-30 19:27:00.065357', '2026-03-30 19:27:00.065357', 'basic')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('sammie@welch.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'jeannie_glover' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'fabiola' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'alfred.dicki' LIMIT 1[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('duplicate@example.com', '$2a$04$kMhCAiMpoEHfRtmg2LcZ4eggpwN00.Lzv0rKgcRFs9MjRQhyeaJNK', NULL, NULL, NULL, 'alfred.dicki', '2026-03-30 19:30:02.747972', '2026-03-30 19:30:02.747972', 'basic')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'kenyetta' LIMIT 1[0m
+  [1m[36mTRANSACTION (10.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (3.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('cary@fahey.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'macie' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('mack_olson@buckridge.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('mack_olson@buckridge.test', '$2a$04$gKFSwi15Ac7y3LRKIhut6.7IOk.wFdvuLV1Btlphrvph4HOD8YzBe', NULL, NULL, NULL, 'testuser', '2026-03-30 19:30:02.787985', '2026-03-30 19:30:02.787985', 'basic')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('jovan_nitzsche@walter.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[35m (236.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS `notas_test`[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE DATABASE `notas_test` DEFAULT COLLATE `utf8mb4_unicode_ci`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS `exception_tracks` CASCADE[0m
+  [1m[35m (43.5ms)[0m  [1m[35mCREATE TABLE `exception_tracks` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `body` mediumtext, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `nota` CASCADE[0m
+  [1m[35m (78.5ms)[0m  [1m[35mCREATE TABLE `nota` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `titulo` varchar(255), `descricao` text, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_nota_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `posts` CASCADE[0m
+  [1m[35m (54.1ms)[0m  [1m[35mCREATE TABLE `posts` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `titulo` varchar(255), `descricao` text, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_posts_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `roles` CASCADE[0m
+  [1m[35m (52.4ms)[0m  [1m[35mCREATE TABLE `roles` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `resource_type` varchar(255), `resource_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_roles_on_name_and_resource_type_and_resource_id` (`name`, `resource_type`, `resource_id`), INDEX `index_roles_on_name` (`name`), INDEX `index_roles_on_resource` (`resource_type`, `resource_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (65.6ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `username` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, `role` varchar(255), UNIQUE INDEX `index_users_on_email` (`email`), UNIQUE INDEX `index_users_on_reset_password_token` (`reset_password_token`), UNIQUE INDEX `index_users_on_username` (`username`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `users_roles` CASCADE[0m
+  [1m[35m (71.6ms)[0m  [1m[35mCREATE TABLE `users_roles` (`user_id` bigint, `role_id` bigint, INDEX `index_users_roles_on_role_id` (`role_id`), INDEX `index_users_roles_on_user_id_and_role_id` (`user_id`, `role_id`), INDEX `index_users_roles_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `usuarios` CASCADE[0m
+  [1m[35m (48.0ms)[0m  [1m[35mCREATE TABLE `usuarios` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `username` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_usuarios_on_email` (`email`), UNIQUE INDEX `index_usuarios_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (191.1ms)[0m  [1m[35mALTER TABLE `nota` ADD CONSTRAINT `fk_rails_ca2298c254`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (350.4ms)[0m  [1m[35mALTER TABLE `posts` ADD CONSTRAINT `fk_rails_5b5ddfd518`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (46.8ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (10.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20260331165326)[0m
+  [1m[35m (8.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20260330182643),
+(20260326145718),
+(20260227182553),
+(20260224184456),
+(20260224182018),
+(20260224182005);[0m
+  [1m[35m (63.2ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (15.7ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'test', '2026-03-31 16:59:33.011563', '2026-03-31 16:59:33.011568')[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (10.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '8b70be6fc223960f62e1c9e842e3bea4edebc215', '2026-03-31 16:59:33.035690', '2026-03-31 16:59:33.035700')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.2ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 16:59:33.185973', '2026-03-31 16:59:33.185973')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('shayne@satterfield-grant.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'sheree.ullrich' LIMIT 1[0m
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (7.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (2.2ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 16:59:33.384832', '2026-03-31 16:59:33.384832')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'ashlie.vandervort' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 16:59:33.403615', '2026-03-31 16:59:33.403615')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'noble.zemlak' LIMIT 1[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('duplicate@example.com', '$2a$04$za0SxdWe/ilh/DL1jugs.uVgsnuXS.X908VRtIxCwx6jGcpr/1XzO', NULL, NULL, NULL, 'noble.zemlak', '2026-03-31 16:59:33.415372', '2026-03-31 16:59:33.415372', 'basic')[0m
+  [1m[36mUser::HABTM_Roles Create (0.7ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (1, 3)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'mark' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 16:59:33.437412', '2026-03-31 16:59:33.437412')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('antone.ritchie@kuvalis.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'elliot.breitenberg' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.1ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 16:59:33.455222', '2026-03-31 16:59:33.455222')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('kimber_corkery@oreilly-rath.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('kimber_corkery@oreilly-rath.test', '$2a$04$KkwZelDkmezagTVbONUUlufx/jKWgTMDUmy459hDg.bGk4k2byOKS', NULL, NULL, NULL, 'testuser', '2026-03-31 16:59:33.464851', '2026-03-31 16:59:33.464851', 'basic')[0m
+  [1m[36mUser::HABTM_Roles Create (0.5ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (2, 5)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('carly@hagenes-considine.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.7ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 16:59:33.488504', '2026-03-31 16:59:33.488504')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.8ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 16:59:33.507401', '2026-03-31 16:59:33.507401')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('madaline.sipes@doyle.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'bunny' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('madaline.sipes@doyle.example', '$2a$04$.d33KiWZjmXg4UX5lUp/FObS/.OFYF8uwJJviTuEVNLcUcOE0762K', NULL, NULL, NULL, 'bunny', '2026-03-31 16:59:33.518736', '2026-03-31 16:59:33.518736', 'basic')[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (3, 7)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 16:59:33.543717', '2026-03-31 16:59:33.543717')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('kirk@stanton-tremblay.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'anastacia_klein' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('kirk@stanton-tremblay.example', '$2a$04$gTWtTCEkvxX0iq8s3wyjdOoehoy2MVdXXapT/5VAUHYHTZd8ttLUa', NULL, NULL, NULL, 'anastacia_klein', '2026-03-31 16:59:33.553916', '2026-03-31 16:59:33.553916', 'basic')[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (4, 8)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.0ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 16:59:33.568469', '2026-03-31 16:59:33.568469')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('isidro@dickinson.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'sanjuanita_stoltenberg' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('isidro@dickinson.example', '$2a$04$27LZg/8skqYiYkYkDB9.EOHKmokZV.5.lsRVt7qSccrKvA6/F76qC', NULL, NULL, NULL, 'sanjuanita_stoltenberg', '2026-03-31 16:59:33.577467', '2026-03-31 16:59:33.577467', 'basic')[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (5, 9)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.1ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:21.458057', '2026-03-31 17:00:21.458057')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('keira@keeling-nicolas.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'alfred' LIMIT 1[0m
+  [1m[36mTRANSACTION (14.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (17.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:21.749211', '2026-03-31 17:00:21.749211')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'catrina.davis' LIMIT 1[0m
+  [1m[36mTRANSACTION (8.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (13.1ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:21.774932', '2026-03-31 17:00:21.774932')[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'flora' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('duplicate@example.com', '$2a$04$PqTEQzRW2dQ9rSU5QSDpYe.tIzp1aq6a6.ejWp/khM7uu.PnF/bF2', NULL, NULL, NULL, 'flora', '2026-03-31 17:00:21.801283', '2026-03-31 17:00:21.801283', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.4ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (6, 12)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'jan_mills' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (6.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.1ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:21.832993', '2026-03-31 17:00:21.832993')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('vi@boehm-rowe.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'fidela.kshlerin' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:21.852925', '2026-03-31 17:00:21.852925')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('fausto@cartwright.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('fausto@cartwright.test', '$2a$04$3T6yufFm/oCaAii/t54zre74QffckPtssEtrWTBKfTVdjCTvHGIse', NULL, NULL, NULL, 'testuser', '2026-03-31 17:00:21.863279', '2026-03-31 17:00:21.863279', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.4ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (7, 14)[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('gaye@marks.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.7ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:21.885776', '2026-03-31 17:00:21.885776')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('moises.gutkowski@ratke.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'norberto' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('moises.gutkowski@ratke.test', '$2a$04$D8IQjB7ilyoTO1UihXb63egKLToqCFkqaoPbRIC/vePh14ClA2iaS', NULL, NULL, NULL, 'norberto', '2026-03-31 17:00:21.894228', '2026-03-31 17:00:21.894228', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (8, 15)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 8 AND (((roles.name = 'basic') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:21.907796', '2026-03-31 17:00:21.907796')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('gary_funk@little-kreiger.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'mauro.walsh' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('gary_funk@little-kreiger.example', '$2a$04$wdwCGtv8tAAii6kmQEDniu46jpD2U73ImJoWgyP2icj2c0qNFklMO', NULL, NULL, NULL, 'mauro.walsh', '2026-03-31 17:00:21.916503', '2026-03-31 17:00:21.916503', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.4ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (9, 16)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'admin' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('admin', NULL, NULL, '2026-03-31 17:00:21.920973', '2026-03-31 17:00:21.920973')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser::HABTM_Roles Create (0.6ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (9, 17)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 9 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  [1m[36mTRANSACTION (11.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:21.942278', '2026-03-31 17:00:21.942278')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('russell@wuckert.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'jess' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('russell@wuckert.example', '$2a$04$ghbAvkZOZsMIf7ItaHthSuqThBxZE2mByyc0324o7CiJJaXYQ8QzG', NULL, NULL, NULL, 'jess', '2026-03-31 17:00:21.951362', '2026-03-31 17:00:21.951362', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (10, 18)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (6.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.3ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:21.977969', '2026-03-31 17:00:21.977969')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('stanford@beier-gleason.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'bruce_rohan' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('stanford@beier-gleason.example', '$2a$04$RHXA16m.I5gHdEMU/ogCU.eMiEsciOtYF7aTQ7wXtWflBliLKQsYa', NULL, NULL, NULL, 'bruce_rohan', '2026-03-31 17:00:21.989694', '2026-03-31 17:00:21.989694', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (11, 19)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (12.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.0ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:00:22.012973', '2026-03-31 17:00:22.012973')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('bobby_bergnaum@okon.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'deangelo_goldner' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('bobby_bergnaum@okon.example', '$2a$04$Sii/fsRF.vCeGN6mPMqCD.OaTIaXaZEJcupKDKl4A8zGSHv6SgHC.', NULL, NULL, NULL, 'deangelo_goldner', '2026-03-31 17:00:22.025953', '2026-03-31 17:00:22.025953', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.5ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (12, 20)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (5.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.9ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:46.910979', '2026-03-31 17:21:46.910979')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('edmund.balistreri@predovic-rempel.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'verena' LIMIT 1[0m
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (6.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.7ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:47.088531', '2026-03-31 17:21:47.088531')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'ronnie_bauch' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.7ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:47.104134', '2026-03-31 17:21:47.104134')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'lanny' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('duplicate@example.com', '$2a$04$/4ps1Ntmmp3YJwtLX67E7.vhiTUCK0Ao7JJTCdsEug9pzGju9mWum', NULL, NULL, NULL, 'lanny', '2026-03-31 17:21:47.113140', '2026-03-31 17:21:47.113140', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (13, 23)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('duplicate@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'dillon' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (7.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:47.141306', '2026-03-31 17:21:47.141306')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('paris@mosciski.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'laureen_ondricka' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:47.157114', '2026-03-31 17:21:47.157114')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('johnny.gutkowski@russel-upton.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('johnny.gutkowski@russel-upton.test', '$2a$04$L1g38cDs2PQnOHoKIs2MpevWSErmvkfZMci9sF.3Ek9muKmSVdZlC', NULL, NULL, NULL, 'testuser', '2026-03-31 17:21:47.165193', '2026-03-31 17:21:47.165193', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.4ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (14, 25)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('elsy.pfeffer@reinger.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'testuser' LIMIT 1[0m
+  [1m[36mTRANSACTION (4.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.7ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:47.186192', '2026-03-31 17:21:47.186192')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('patience_wilkinson@schuppe.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'cyrus' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('patience_wilkinson@schuppe.test', '$2a$04$ZwZxkcp7mv.48.1FS7gRBe5MIR9D6l2EJjDMfG6d2uJIYfBea0tAC', NULL, NULL, NULL, 'cyrus', '2026-03-31 17:21:47.193929', '2026-03-31 17:21:47.193929', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (15, 26)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 15 AND (((roles.name = 'basic') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.1ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:47.207877', '2026-03-31 17:21:47.207877')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('demetrius@funk.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'lovetta' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('demetrius@funk.test', '$2a$04$TA5/TJYmDP3ZAmq1u7Y.OO.0vjZYHqddDbUEbF5CarW9dee.MiF5m', NULL, NULL, NULL, 'lovetta', '2026-03-31 17:21:47.217382', '2026-03-31 17:21:47.217382', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.6ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (16, 27)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (1.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'admin' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.0ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('admin', NULL, NULL, '2026-03-31 17:21:47.224330', '2026-03-31 17:21:47.224330')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser::HABTM_Roles Create (1.0ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (16, 28)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 16 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  [1m[36mTRANSACTION (14.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.5ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:47.250496', '2026-03-31 17:21:47.250496')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('karleen_langosh@blick-labadie.test' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'marquis.larson' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('karleen_langosh@blick-labadie.test', '$2a$04$V4JsSgO0UDoDCsIDkTRTrOO2oXE4ZtL8j/c2tTfBhYu7Ds40H5C52', NULL, NULL, NULL, 'marquis.larson', '2026-03-31 17:21:47.260115', '2026-03-31 17:21:47.260115', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (17, 29)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (9.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (0.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:47.285682', '2026-03-31 17:21:47.285682')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('karoline.beahan@mueller.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'dyan' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('karoline.beahan@mueller.example', '$2a$04$vfNiBeGCah.S13UWlDcNGu9OTXrexGZXo9dSXM4FmsiSfigMfB5om', NULL, NULL, NULL, 'dyan', '2026-03-31 17:21:47.294556', '2026-03-31 17:21:47.294556', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.4ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (18, 30)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Create (1.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `resource_type`, `resource_id`, `created_at`, `updated_at`) VALUES ('basic', NULL, NULL, '2026-03-31 17:21:47.308141', '2026-03-31 17:21:47.308141')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('alexander.wilkinson@durgan.example' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`username` = 'oren' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `username`, `created_at`, `updated_at`, `role`) VALUES ('alexander.wilkinson@durgan.example', '$2a$04$HGm1Y0.WcsfLOrc19D2dfe4WFsRPbPgJfaemIpqSZngKtEeUn6bny', NULL, NULL, NULL, 'oren', '2026-03-31 17:21:47.318702', '2026-03-31 17:21:47.318702', NULL)[0m
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (19, 31)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (4.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m

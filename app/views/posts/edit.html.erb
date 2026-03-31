@@ -1,0 +1,31 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">
+          <i class="fas fa-edit mr-2"></i><%= t('views.posts.edit.header') %>
+        </h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><%= link_to t('views.posts.index.header'), posts_path %></li>
+          <li class="breadcrumb-item"><%= link_to @post.titulo, @post %></li>
+          <li class="breadcrumb-item active"><%= t('breadcrumbs.edit') %></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%= t('views.posts.edit.title') %></h3>
+      </div>
+      <div class="card-body">
+        <%= render "form", post: @post %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title"><%= t('views.users.show.title') %>: <%= user.email %></h3>
+  </div>
+  <div class="card-body">
+    <dl class="row mb-0">
+      <dt class="col-sm-3"><%= User.human_attribute_name(:id) %>:</dt>
+      <dd class="col-sm-9"><%= user.id %></dd>
+      
+      <dt class="col-sm-3"><%= User.human_attribute_name(:email) %>:</dt>
+      <dd class="col-sm-9"><%= user.email %></dd>
+      
+      <dt class="col-sm-3"><%= User.human_attribute_name(:created_at) %>:</dt>
+      <dd class="col-sm-9"><%= user.created_at.strftime('%d/%m/%Y %H:%M') %></dd>
+      
+      <dt class="col-sm-3"><%= User.human_attribute_name(:updated_at) %>:</dt>
+      <dd class="col-sm-9"><%= user.updated_at.strftime('%d/%m/%Y %H:%M') %></dd>
+    </dl>
+  </div>
+</div>

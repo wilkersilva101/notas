@@ -1,0 +1,100 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">
+          <i class="fas fa-edit mr-2"></i><%= t('devise.registrations.edit.title') %>
+        </h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><%= link_to t('breadcrumbs.home'), root_path %></li>
+          <li class="breadcrumb-item active"><%= t('devise.registrations.edit.header') %></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%= t('devise.registrations.edit.title') %>: <%= current_user.email %></h3>
+      </div>
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "needs-validation" }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :email, User.human_attribute_name(:email), class: "form-label" %>
+                <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+              </div>
+            </div>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div class="alert alert-warning">
+              <i class="fas fa-exclamation-triangle"></i> <%= t('devise.registrations.edit.pending_confirmation') %>: <%= resource.unconfirmed_email %>
+            </div>
+          <% end %>
+
+          <hr>
+          <h5><%= t('devise.registrations.edit.change_password') %></h5>
+          <p class="text-muted small"><%= t('devise.registrations.edit.password_hint') %></p>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :password, User.human_attribute_name(:password), class: "form-label" %>
+                <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+                <% if @minimum_password_length %>
+                  <small class="form-text text-muted"><%= @minimum_password_length %> caracteres mínimos</small>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :password_confirmation, User.human_attribute_name(:password_confirmation), class: "form-label" %>
+                <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <h5><%= t('devise.registrations.edit.confirm_changes') %></h5>
+          <p class="text-muted small"><%= t('devise.registrations.edit.current_password_hint') %></p>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :current_password, User.human_attribute_name(:current_password), class: "form-label" %>
+                <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <%= f.submit t('views.common.save'), class: "btn btn-primary" %>
+            <%= link_to t('views.common.cancel'), :back, class: "btn btn-secondary ml-2" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card card-danger mt-4">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fas fa-exclamation-triangle mr-2"></i><%= t('devise.registrations.edit.cancel_account') %>
+        </h3>
+      </div>
+      <div class="card-body">
+        <p><%= t('devise.registrations.edit.cancel_account_warning') %> <%= button_to t('devise.registrations.edit.cancel_account_button'), registration_path(resource_name), 
+            data: { confirm: t('devise.registrations.edit.cancel_confirm'), turbo_confirm: t('devise.registrations.edit.cancel_confirm') }, 
+            method: :delete, class: "btn btn-danger" %></p>
+      </div>
+    </div>
+  </div>
+</section>

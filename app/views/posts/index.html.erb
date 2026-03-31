@@ -1,0 +1,107 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">
+          <i class="fas fa-list mr-2"></i><%= t('views.posts.index.header') %>
+        </h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item active"><%= t('views.posts.index.header') %></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="content">
+  <div class="container-fluid">
+    <!-- Formulário de busca -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <%= search_form_for @q do |f| %>
+          <div class="row">
+            <div class="col-md-10">
+              <%= f.search_field :titulo_cont, 
+                  class: "form-control", 
+                  placeholder: t('views.posts.index.search_placeholder') %>
+            </div>
+            <div class="col-md-2">
+              <%= f.submit t('views.common.search'), class: "btn btn-primary btn-block" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%= t('views.posts.index.title') %></h3>
+        <div class="card-tools">
+          <%= link_to new_post_path, class: "btn btn-primary btn-sm" do %>
+            <i class="fas fa-plus"></i> <%= t('views.posts.index.new') %>
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="card-body p-0">
+        <% if @posts.any? %>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Autor</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @posts.each do |post| %>
+                  <tr>
+                    <td><strong><%= link_to post.titulo, post %></strong></td>
+                    <td>
+                      <span class="badge badge-info">
+                        <i class="fas fa-user"></i> <%= post.user.email %>
+                      </span>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          <i class="fas fa-cog"></i> <%= t('views.common.actions') %>
+                        </button>
+                        <div class="dropdown-menu">
+                          <%= link_to post, class: "dropdown-item" do %>
+                            <i class="fas fa-eye text-info text-center" style="width: 20px;"></i> <%= t('views.common.view') %>
+                          <% end %>
+                          <%= link_to edit_post_path(post), class: "dropdown-item" do %>
+                            <i class="fas fa-edit text-warning text-center" style="width: 20px;"></i> <%= t('views.common.edit') %>
+                          <% end %>
+                  <div class="dropdown-divider"></div>
+                          <%= button_to post, method: :delete, form: { class: "w-100" }, class: "dropdown-item text-danger", style: "background:none;border:0;padding:0;text-align:left;width:100%;", data: { controller: "confirm", action: "submit->confirm#confirm", confirm_message_value: t('views.common.confirm_delete') } do %>
+                            <i class="fas fa-trash text-center" style="width: 20px;"></i> <%= t('views.common.delete') %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Paginação -->
+          <div class="d-flex justify-content-center mt-4">
+            <%= paginate @posts, theme: 'bootstrap4' %>
+          </div>
+        <% else %>
+          <div class="text-center py-4">
+            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+            <p class="text-muted"><%= t('views.posts.index.no_records') %></p>
+            <%= link_to t('views.posts.index.first_record'), new_post_path, class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Notas" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <% unread_notifications = current_user.notifications.where(read: false).order(created_at: :desc) %>
+            <!-- Notifications Dropdown Menu -->
+            <li class="nav-item dropdown">
+              <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-bell"></i>
+                <% if unread_notifications.any? %>
+                  <span class="badge badge-warning navbar-badge"><%= unread_notifications.count %></span>
+                <% end %>
+              </a>
+              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-header"><%= unread_notifications.count %> Notificações</span>
+                <% if unread_notifications.any? %>
+                  <% unread_notifications.limit(5).each do |notification| %>
+                    <div class="dropdown-divider"></div>
+                    <a href="<%= notifications_path %>" class="dropdown-item" title="<%= notification.message %>">
+                      <i class="fas fa-envelope mr-2"></i> <%= truncate(notification.message, length: 22) %>
+                      <span class="float-right text-muted text-sm"><%= time_ago_in_words(notification.created_at).gsub('aproximadamente ', '').gsub('minutos', 'mins').gsub('minuto', 'min') %></span>
+                    </a>
+                  <% end %>
+                <% else %>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item dropdown-footer">Nenhuma notificação nova</a>
+                <% end %>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Ver Todas as Notificações", notifications_path, class: "dropdown-item dropdown-footer" %>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown user-menu">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                <i class="fas fa-user-circle"></i>
+                <span class="d-none d-md-inline"><%= current_user.username %></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="width: 280px;">
+                <!-- User image -->
+                <li class="user-header bg-primary">
+                  <div class="text-center">
+                    <i class="fas fa-user-circle img-circle" style="font-size: 48px; color: white;"></i>
+                  </div>
+                  <p class="text-white">
+                    <%= current_user.email %>
+                    <small><%= t('devise.registrations.edit.member_since') %> <%= current_user.created_at.strftime("%d/%m/%Y %H:%M:%S") %></small>
+                  </p>
+                </li>
+                <!-- Menu Body -->
+                <li class="user-body">
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <small><%= t('views.common.welcome_message') %></small>
+                    </div>
+                  </div>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <%= link_to edit_user_path(current_user), class: "btn btn-default btn-flat" do %>
+                    <i class="fas fa-lock"></i> Senha
+                  <% end %>
+                  <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-default btn-flat float-right" do %>
+                    <i class="fas fa-power-off"></i> <%= t('views.common.logout') %>
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to t('views.common.login'), new_user_session_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t('views.common.register'), new_user_registration_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/" class="brand-link">
+          <i class="fas fa-sticky-note brand-image img-circle elevation-3 ml-1" style="opacity: .8"></i>
+          <span class="brand-text font-weight-light">Notas</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <% if user_signed_in? %>
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <i class="fas fa-user-circle img-circle elevation-2" style="font-size: 34px;"></i>
+            </div>
+            <div class="info">
+              <a href="#" class="d-block text-white"><%= current_user.username %></a>
+            </div>
+          </div>
+          <% end %>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item">
+                <a href="#" class="nav-link <%= (current_page?(posts_path) || current_page?(new_post_path)) ? 'active' : '' %>">
+                  <i class="nav-icon fas fa-sticky-note"></i>
+                  <p>
+                    <%= t('views.posts.index.header') %>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <%= link_to posts_path, class: "nav-link #{current_page?(posts_path) ? 'active' : ''}" do %>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p><%= t('views.posts.index.list') %></p>
+                    <% end %>
+                  </li>
+                  <% if user_signed_in? %>
+                  <li class="nav-item">
+                    <%= link_to new_post_path, class: "nav-link #{current_page?(new_post_path) ? 'active' : ''}" do %>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p><%= t('views.posts.new.title') %></p>
+                    <% end %>
+                  </li>
+                  <% end %>
+                </ul>
+              </li>
+              <% if user_signed_in? && current_user.admin? %>
+              <li class="nav-item">
+                <a href="#" class="nav-link <%= current_page?(users_path) ? 'active' : '' %>">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    <%= t('views.users.index.header') %>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <%= link_to users_path, class: "nav-link #{current_page?(users_path) ? 'active' : ''}" do %>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p><%= t('views.users.index.list') %></p>
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link <%= request.path.start_with?('/exception-track') ? 'active' : '' %>">
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>
+                    <%= t('views.common.settings') %>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <%= link_to "/exception-track", class: "nav-link #{request.path.start_with?('/exception-track') ? 'active' : ''}" do %>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Exception Track</p>
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Flash Messages -->
+        <% if notice %>
+          <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+            <%= notice %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+            <%= alert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
+
+      <!-- Footer -->
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+          <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; <%= Date.current.year %>. <%= t('views.common.all_rights_reserved') %></strong>
+      </footer>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    
+    <!-- Initialize AdminLTE -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Remove preloader if exists
+        const preloader = document.querySelector('.preloader');
+        if (preloader) {
+          preloader.style.display = 'none';
+        }
+        
+        // Initialize AdminLTE
+        if (typeof $ !== 'undefined') {
+          $('body').Layout();
+        }
+      });
+    </script>
+  </body>
+</html>

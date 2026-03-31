@@ -1,0 +1,61 @@
+<% content_for :body_class, "register-page" %>
+
+<div class="register-box">
+  <div class="register-logo">
+    <a href="#"><b>Notas</b></a>
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">Cadastre-se para começar</p>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mb-0" }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="input-group mb-3">
+          <%= f.email_field :email, class: "form-control", placeholder: "Email", autofocus: true, autocomplete: "email" %>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <%= f.password_field :password, class: "form-control", placeholder: "Senha", autocomplete: "new-password" %>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <% if @minimum_password_length %>
+          <small class="text-muted mb-3 d-block">Mínimo de <%= @minimum_password_length %> caracteres</small>
+        <% end %>
+        <div class="input-group mb-3">
+          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirmar Senha", autocomplete: "new-password" %>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <%= f.submit "Cadastrar", class: "btn btn-primary btn-block" %>
+          </div>
+          <!-- /.col -->
+        </div>
+      <% end %>
+
+      <div class="social-auth-links text-center">
+        <p>- OU -</p>
+      </div>
+      
+      <p class="mb-0">
+        <%= link_to "Já tenho uma conta", new_session_path(resource_name) %>
+      </p>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
