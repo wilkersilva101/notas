@@ -36465,3 +36465,523 @@ Processing by NotificationsController#index as HTML
 Completed 200 OK in 49ms (Views: 18.2ms | ActiveRecord: 5.7ms (8 queries, 1 cached) | GC: 1.2ms)
 
 
+  [1m[36mActiveRecord::SchemaMigration Load (3.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='Notas'*/[0m
+Started GET "/" for ::1 at 2026-04-01 07:39:43 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='Notas'*/[0m
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 29ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2026-04-01 07:39:43 -0300
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mRole Load (1.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1 /*action='new',application='Notas',controller='sessions'*/[0m
+  ↳ app/models/user.rb:27:in `set_default_role'
+  Rendering layout layouts/devise.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/devise
+  Rendered devise/sessions/new.html.erb within layouts/devise (Duration: 7.4ms | GC: 0.0ms)
+  Rendered layout layouts/devise.html.erb (Duration: 9.0ms | GC: 0.0ms)
+Completed 200 OK in 114ms (Views: 19.5ms | ActiveRecord: 18.1ms (1 query, 0 cached) | GC: 2.5ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2026-04-01 07:39:48 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Entrar"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'wilkerwanderlei@gmail.com' ORDER BY `users`.`id` ASC LIMIT 1 /*action='create',application='Notas',controller='sessions'*/[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 340ms (ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 17.8ms)
+
+
+Started GET "/" for ::1 at 2026-04-01 07:39:48 -0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  [1m[36mRole Load (1.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/models/ability.rb:9:in `initialize'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (1.1ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:49
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 6 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:60
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mPost Count (1.1ms)[0m  [1m[34mSELECT COUNT(DISTINCT `posts`.`id`) FROM `posts` /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:95
+  Rendered posts/index.html.erb within layouts/application (Duration: 70.3ms | GC: 9.1ms)
+  [1m[36mNotification Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 115.3ms | GC: 12.1ms)
+Completed 200 OK in 155ms (Views: 107.7ms | ActiveRecord: 11.3ms (15 queries, 7 cached) | GC: 13.4ms)
+
+
+Started GET "/notifications" for ::1 at 2026-04-01 07:40:03 -0300
+Processing by NotificationsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  [1m[36mNotification Pluck (0.8ms)[0m  [1m[34mSELECT `notifications`.`id` FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/controllers/notifications_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering notifications/index.html.erb within layouts/application
+  [1m[36mNotification Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/notifications/index.html.erb:29
+  [1m[36mNotification Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/notifications/index.html.erb:52
+  Rendered notifications/index.html.erb within layouts/application (Duration: 8.4ms | GC: 0.0ms)
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 24.0ms | GC: 0.0ms)
+Completed 200 OK in 56ms (Views: 20.7ms | ActiveRecord: 5.7ms (8 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/users" for ::1 at 2026-04-01 07:41:31 -0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='users'*/[0m
+  [1m[36mRole Load (1.1ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='users'*/[0m
+  ↳ app/models/ability.rb:9:in `initialize'
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` LIMIT 1 /*action='index',application='Notas',controller='users'*/[0m
+  ↳ app/views/users/index.html.erb:44
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT DISTINCT `users`.* FROM `users` /*action='index',application='Notas',controller='users'*/[0m
+  ↳ app/views/users/index.html.erb:56
+  Rendered users/index.html.erb within layouts/application (Duration: 14.8ms | GC: 0.7ms)
+  [1m[36mNotification Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='users'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='users'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 29.0ms | GC: 0.7ms)
+Completed 200 OK in 56ms (Views: 26.9ms | ActiveRecord: 5.0ms (8 queries, 2 cached) | GC: 1.4ms)
+
+
+Started GET "/notifications" for ::1 at 2026-04-01 07:41:38 -0300
+Processing by NotificationsController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  [1m[36mNotification Pluck (1.0ms)[0m  [1m[34mSELECT `notifications`.`id` FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/controllers/notifications_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering notifications/index.html.erb within layouts/application
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/notifications/index.html.erb:29
+  [1m[36mNotification Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/notifications/index.html.erb:52
+  Rendered notifications/index.html.erb within layouts/application (Duration: 4.9ms | GC: 0.0ms)
+  [1m[36mNotification Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 21.9ms | GC: 0.1ms)
+Completed 200 OK in 46ms (Views: 19.0ms | ActiveRecord: 5.4ms (8 queries, 1 cached) | GC: 0.6ms)
+
+
+Started GET "/notifications" for ::1 at 2026-04-01 07:43:49 -0300
+Processing by NotificationsController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  [1m[36mNotification Pluck (0.6ms)[0m  [1m[34mSELECT `notifications`.`id` FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/controllers/notifications_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering notifications/index.html.erb within layouts/application
+  [1m[36mNotification Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/notifications/index.html.erb:29
+  [1m[36mNotification Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/notifications/index.html.erb:52
+  Rendered notifications/index.html.erb within layouts/application (Duration: 5.8ms | GC: 0.5ms)
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 23.0ms | GC: 1.4ms)
+Completed 200 OK in 51ms (Views: 20.1ms | ActiveRecord: 4.9ms (8 queries, 1 cached) | GC: 1.7ms)
+
+
+Started GET "/" for ::1 at 2026-04-01 07:43:49 -0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  [1m[36mRole Load (1.1ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/models/ability.rb:9:in `initialize'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.8ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:49
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 6 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:60
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mPost Count (1.6ms)[0m  [1m[34mSELECT COUNT(DISTINCT `posts`.`id`) FROM `posts` /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:95
+  Rendered posts/index.html.erb within layouts/application (Duration: 56.1ms | GC: 18.5ms)
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 68.3ms | GC: 18.5ms)
+Completed 200 OK in 97ms (Views: 64.0ms | ActiveRecord: 7.7ms (15 queries, 7 cached) | GC: 18.5ms)
+
+
+Started GET "/exception-track" for ::1 at 2026-04-01 07:43:52 -0300
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*application='Notas'*/[0m
+  [1m[36mRole Load (1.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*application='Notas'*/[0m
+  ↳ app/models/user.rb:21:in `admin?'
+Processing by ExceptionTrack::LogsController#index as HTML
+  Rendering layout /home/wilker/.asdf/installs/ruby/3.3.3/lib/ruby/gems/3.3.0/gems/exception-track-1.3.0/app/views/layouts/exception-track/application.html.erb
+  Rendering /home/wilker/.asdf/installs/ruby/3.3.3/lib/ruby/gems/3.3.0/gems/exception-track-1.3.0/app/views/exception_track/logs/index.html.erb within layouts/exception-track/application
+  [1m[36mExceptionTrack::Log Load (1.6ms)[0m  [1m[34mSELECT `exception_tracks`.* FROM `exception_tracks` ORDER BY id desc LIMIT 15 OFFSET 0 /*action='index',application='Notas',controller='logs'*/[0m
+  Rendered /home/wilker/.asdf/installs/ruby/3.3.3/lib/ruby/gems/3.3.0/gems/exception-track-1.3.0/app/views/exception_track/logs/index.html.erb within layouts/exception-track/application (Duration: 19.7ms | GC: 0.2ms)
+  Rendered layout /home/wilker/.asdf/installs/ruby/3.3.3/lib/ruby/gems/3.3.0/gems/exception-track-1.3.0/app/views/layouts/exception-track/application.html.erb (Duration: 21.8ms | GC: 0.2ms)
+Completed 200 OK in 43ms (Views: 20.9ms | ActiveRecord: 2.9ms (1 query, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/exception-track" for ::1 at 2026-04-01 07:43:53 -0300
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*application='Notas'*/[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*application='Notas'*/[0m
+  ↳ app/models/user.rb:21:in `admin?'
+Processing by ExceptionTrack::LogsController#index as HTML
+  Rendering layout /home/wilker/.asdf/installs/ruby/3.3.3/lib/ruby/gems/3.3.0/gems/exception-track-1.3.0/app/views/layouts/exception-track/application.html.erb
+  Rendering /home/wilker/.asdf/installs/ruby/3.3.3/lib/ruby/gems/3.3.0/gems/exception-track-1.3.0/app/views/exception_track/logs/index.html.erb within layouts/exception-track/application
+  [1m[36mExceptionTrack::Log Load (0.9ms)[0m  [1m[34mSELECT `exception_tracks`.* FROM `exception_tracks` ORDER BY id desc LIMIT 15 OFFSET 0 /*action='index',application='Notas',controller='logs'*/[0m
+  Rendered /home/wilker/.asdf/installs/ruby/3.3.3/lib/ruby/gems/3.3.0/gems/exception-track-1.3.0/app/views/exception_track/logs/index.html.erb within layouts/exception-track/application (Duration: 8.4ms | GC: 0.2ms)
+  Rendered layout /home/wilker/.asdf/installs/ruby/3.3.3/lib/ruby/gems/3.3.0/gems/exception-track-1.3.0/app/views/layouts/exception-track/application.html.erb (Duration: 9.3ms | GC: 0.2ms)
+Completed 200 OK in 27ms (Views: 8.9ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/" for ::1 at 2026-04-01 07:43:56 -0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  [1m[36mRole Load (1.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/models/ability.rb:9:in `initialize'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.5ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:49
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 6 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:60
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mPost Count (1.1ms)[0m  [1m[34mSELECT COUNT(DISTINCT `posts`.`id`) FROM `posts` /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:95
+  Rendered posts/index.html.erb within layouts/application (Duration: 33.7ms | GC: 0.0ms)
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 62.4ms | GC: 12.4ms)
+Completed 200 OK in 95ms (Views: 59.3ms | ActiveRecord: 5.8ms (15 queries, 7 cached) | GC: 12.4ms)
+
+
+Started GET "/notifications" for ::1 at 2026-04-01 07:44:03 -0300
+Processing by NotificationsController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  [1m[36mNotification Pluck (0.9ms)[0m  [1m[34mSELECT `notifications`.`id` FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/controllers/notifications_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering notifications/index.html.erb within layouts/application
+  [1m[36mNotification Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/notifications/index.html.erb:29
+  [1m[36mNotification Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/notifications/index.html.erb:52
+  Rendered notifications/index.html.erb within layouts/application (Duration: 8.2ms | GC: 0.6ms)
+  [1m[36mNotification Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='notifications'*/[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 22.7ms | GC: 0.6ms)
+Completed 200 OK in 53ms (Views: 18.7ms | ActiveRecord: 6.6ms (8 queries, 1 cached) | GC: 0.6ms)
+
+
+Started GET "/" for ::1 at 2026-04-01 07:49:04 -0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/models/ability.rb:9:in `initialize'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.6ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:49
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 6 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:60
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mPost Count (0.6ms)[0m  [1m[34mSELECT COUNT(DISTINCT `posts`.`id`) FROM `posts` /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:95
+  Rendered posts/index.html.erb within layouts/application (Duration: 53.1ms | GC: 1.1ms)
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 79.6ms | GC: 1.1ms)
+Completed 200 OK in 150ms (Views: 74.1ms | ActiveRecord: 14.6ms (15 queries, 7 cached) | GC: 13.7ms)
+
+
+Started GET "/" for ::1 at 2026-04-01 07:49:27 -0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/models/ability.rb:9:in `initialize'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.6ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:49
+  [1m[36mPost Load (10.2ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 6 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:60
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mPost Count (0.7ms)[0m  [1m[34mSELECT COUNT(DISTINCT `posts`.`id`) FROM `posts` /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:95
+  Rendered posts/index.html.erb within layouts/application (Duration: 53.1ms | GC: 10.5ms)
+  [1m[36mNotification Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mCACHE Role Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 68.8ms | GC: 11.1ms)
+Completed 200 OK in 104ms (Views: 55.2ms | ActiveRecord: 15.9ms (15 queries, 7 cached) | GC: 11.1ms)
+
+
+Started DELETE "/users/sign_out?_method=delete" for ::1 at 2026-04-01 07:49:56 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='Notas'*/[0m
+Processing by Devise::SessionsController#destroy as TURBO_STREAM
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='destroy',application='Notas',controller='sessions'*/[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 285ms (ActiveRecord: 3.7ms (1 query, 0 cached) | GC: 30.5ms)
+
+
+Started GET "/" for ::1 at 2026-04-01 07:49:57 -0300
+Processing by PostsController#index as TURBO_STREAM
+Completed 401 Unauthorized in 18ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2026-04-01 07:49:57 -0300
+Processing by Devise::SessionsController#new as TURBO_STREAM
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1 /*action='new',application='Notas',controller='sessions'*/[0m
+  ↳ app/models/user.rb:27:in `set_default_role'
+  Rendering layout layouts/devise.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/devise
+  Rendered devise/sessions/new.html.erb within layouts/devise (Duration: 8.0ms | GC: 1.3ms)
+  Rendered layout layouts/devise.html.erb (Duration: 9.4ms | GC: 1.3ms)
+Completed 200 OK in 100ms (Views: 17.2ms | ActiveRecord: 3.0ms (1 query, 0 cached) | GC: 25.3ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2026-04-01 07:49:57 -0300
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`name` = 'basic' AND `roles`.`resource_type` IS NULL AND `roles`.`resource_id` IS NULL ORDER BY `roles`.`id` ASC LIMIT 1 /*action='new',application='Notas',controller='sessions'*/[0m
+  ↳ app/models/user.rb:27:in `set_default_role'
+  Rendering layout layouts/devise.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/devise
+  Rendered devise/sessions/new.html.erb within layouts/devise (Duration: 1.9ms | GC: 0.0ms)
+  Rendered layout layouts/devise.html.erb (Duration: 2.7ms | GC: 0.0ms)
+Completed 200 OK in 27ms (Views: 3.2ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 1.1ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2026-04-01 07:49:58 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Entrar"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'wilkerwanderlei@gmail.com' ORDER BY `users`.`id` ASC LIMIT 1 /*action='create',application='Notas',controller='sessions'*/[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 318ms (ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 1.1ms)
+
+
+Started GET "/" for ::1 at 2026-04-01 07:49:59 -0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/models/ability.rb:9:in `initialize'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.5ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:49
+  [1m[36mPost Load (1.2ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 6 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:60
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mPost Count (1.2ms)[0m  [1m[34mSELECT COUNT(DISTINCT `posts`.`id`) FROM `posts` /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:95
+  Rendered posts/index.html.erb within layouts/application (Duration: 51.2ms | GC: 0.0ms)
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 106.0ms | GC: 20.0ms)
+Completed 200 OK in 148ms (Views: 100.0ms | ActiveRecord: 9.2ms (15 queries, 7 cached) | GC: 23.4ms)
+
+
+Started GET "/" for ::1 at 2026-04-01 07:50:08 -0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  [1m[36mRole Load (1.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/models/ability.rb:9:in `initialize'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.7ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:49
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 6 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:60
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mPost Count (0.6ms)[0m  [1m[34mSELECT COUNT(DISTINCT `posts`.`id`) FROM `posts` /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:95
+  Rendered posts/index.html.erb within layouts/application (Duration: 33.9ms | GC: 1.2ms)
+  [1m[36mNotification Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 46.5ms | GC: 1.2ms)
+Completed 200 OK in 77ms (Views: 43.8ms | ActiveRecord: 5.6ms (15 queries, 7 cached) | GC: 1.6ms)
+
+
+Started GET "/" for ::1 at 2026-04-01 07:50:30 -0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL))) /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/models/ability.rb:9:in `initialize'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.5ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 1 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:49
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT DISTINCT `posts`.* FROM `posts` LIMIT 6 OFFSET 0 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:60
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/posts/index.html.erb:65
+  [1m[36mPost Count (0.5ms)[0m  [1m[34mSELECT COUNT(DISTINCT `posts`.`id`) FROM `posts` /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:95
+  Rendered posts/index.html.erb within layouts/application (Duration: 57.6ms | GC: 12.4ms)
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1 /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:46
+  [1m[36mNotification Count (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE /*action='index',application='Notas',controller='posts'*/[0m
+  ↳ app/views/layouts/application.html.erb:51
+  [1m[36mCACHE Notification Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`user_id` = 1 AND `notifications`.`read` = FALSE LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:52
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/models/user.rb:21:in `admin?'
+  Rendered layout layouts/application.html.erb (Duration: 82.6ms | GC: 13.0ms)
+Completed 200 OK in 141ms (Views: 76.3ms | ActiveRecord: 13.5ms (15 queries, 7 cached) | GC: 13.6ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='Notas'*/[0m
