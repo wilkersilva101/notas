@@ -41,7 +41,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         if current_user.has_role?(:admin) && @post.user != current_user
-          Notification.create!(user: @post.user, message: "O administrador alterou o seu post: '#{@post.titulo}'.")
+          Notification.create!(user: @post.user, message: "O Admin alterou o seu post: '#{@post.titulo}'.")
         end
         format.html { redirect_to @post, notice: t("flash.posts.update.notice"), status: :see_other }
         format.json { render :show, status: :ok, location: @post }
@@ -59,7 +59,7 @@ class PostsController < ApplicationController
     @post.destroy!
 
     if current_user.has_role?(:admin) && owner != current_user
-      Notification.create!(user: owner, message: "O administrador excluiu o seu post: '#{title}'.")
+      Notification.create!(user: owner, message: "O Admin excluiu o seu post: '#{title}'.")
     end
 
     respond_to do |format|

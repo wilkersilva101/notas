@@ -52,9 +52,24 @@
                 <% if unread_notifications.any? %>
                   <% unread_notifications.limit(5).each do |notification| %>
                     <div class="dropdown-divider"></div>
-                    <a href="<%= notifications_path %>" class="dropdown-item" title="<%= notification.message %>">
-                      <i class="fas fa-envelope mr-2"></i> <%= truncate(notification.message, length: 22) %>
-                      <span class="float-right text-muted text-sm"><%= time_ago_in_words(notification.created_at).gsub('aproximadamente ', '').gsub('minutos', 'mins').gsub('minuto', 'min') %></span>
+                    <a href="<%= notifications_path %>" class="dropdown-item">
+                      <div class="media">
+                        <div class="media-body">
+                          <p class="text-sm text-wrap mb-1">
+                            <i class="fas fa-envelope fa-fw mr-1"></i> <%= notification.message %>
+                          </p>
+                          <p class="text-sm text-muted mb-0">
+                            <% 
+                               time_str = time_ago_in_words(notification.created_at)
+                               time_str = time_str.gsub(/less than a minute|menos de um minuto/i, 'agora')
+                               time_str = time_str.gsub(/about |aproximadamente /i, '')
+                               time_str = time_str.gsub(/minutes?|minutos?/i, 'min')
+                               time_str = time_str.gsub('hour', 'hora').gsub('hours', 'horas')
+                            %>
+                            <i class="far fa-clock fa-fw mr-1"></i> <%= time_str %>
+                          </p>
+                        </div>
+                      </div>
                     </a>
                   <% end %>
                 <% else %>
