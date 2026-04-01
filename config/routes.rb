@@ -21,7 +21,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do
     mount ExceptionTrack::Engine => "/exception-track"
+    mount Sidekiq::Web => "/sidekiq"
   end
 end
