@@ -196,8 +196,8 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item <%= (request.path.start_with?('/exception-track') || request.path.start_with?('/sidekiq')) ? 'menu-open' : '' %>">
-                <a href="#" class="nav-link <%= (request.path.start_with?('/exception-track') || request.path.start_with?('/sidekiq')) ? 'active' : '' %>">
+              <li class="nav-item <%= (request.path.start_with?('/exception-track') || request.path.start_with?('/sidekiq') || request.path.start_with?('/admin/announcements')) ? 'menu-open' : '' %>">
+                <a href="#" class="nav-link <%= (request.path.start_with?('/exception-track') || request.path.start_with?('/sidekiq') || request.path.start_with?('/admin/announcements')) ? 'active' : '' %>">
                   <i class="nav-icon fas fa-cog"></i>
                   <p>
                     <%= t('views.common.settings') %>
@@ -215,6 +215,12 @@
                     <%= link_to "/sidekiq", class: "nav-link #{request.path.start_with?('/sidekiq') ? 'active' : ''}" do %>
                       <i class="far fa-circle nav-icon"></i>
                       <p>Sidekiq Jobs</p>
+                    <% end %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to new_admin_announcement_path, class: "nav-link #{request.path.start_with?('/admin/announcements') ? 'active' : ''}" do %>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Avisos</p>
                     <% end %>
                   </li>
                 </ul>
