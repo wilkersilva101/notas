@@ -1,0 +1,4 @@
+cleanup_old_notifications_job:
+  cron: "0 0 * * *"
+  class: "CleanupOldNotificationsJob"
+  description: "Limpa notificações lidas mais antigas que 30 dias"
