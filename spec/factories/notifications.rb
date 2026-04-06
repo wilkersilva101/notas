@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :notification do
-    user { nil }
-    message { "MyString" }
+    association :user
+    message { "Você tem uma nova notificação" }
     read { false }
   end
 end

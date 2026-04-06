@@ -46,9 +46,9 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th><%= User.human_attribute_name(:id) %></th>
-                  <th><%= User.human_attribute_name(:email) %></th>
-                  <th><%= User.human_attribute_name(:created_at) %></th>
+                  <th><%= sort_link(@q, :id, User.human_attribute_name(:id)) %></th>
+                  <th><%= sort_link(@q, :email, User.human_attribute_name(:email)) %></th>
+                  <th><%= sort_link(@q, :created_at, User.human_attribute_name(:created_at)) %></th>
                   <th><%= t('views.common.actions') %></th>
                 </tr>
               </thead>
