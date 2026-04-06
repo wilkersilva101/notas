@@ -52,7 +52,7 @@
                 <% if unread_notifications.any? %>
                   <% unread_notifications.limit(5).each do |notification| %>
                     <div class="dropdown-divider"></div>
-                    <a href="<%= notifications_path %>" class="dropdown-item">
+                    <%= link_to mark_as_read_notification_path(notification), data: { turbo_method: :patch }, class: "dropdown-item" do %>
                       <div class="media">
                         <div class="media-body">
                           <p class="text-sm text-wrap mb-1">
@@ -70,7 +70,7 @@
                           </p>
                         </div>
                       </div>
-                    </a>
+                    <% end %>
                   <% end %>
                 <% else %>
                   <div class="dropdown-divider"></div>

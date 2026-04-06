@@ -1,8 +1,11 @@
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
-      <div class="col-sm-6">
+      <div class="col-sm-6 d-flex align-items-center">
         <h1 class="m-0">Suas Notificações</h1>
+        <% if @unread_ids.any? %>
+          <%= button_to 'Marcar todas como lidas', mark_all_as_read_notifications_path, method: :patch, class: 'btn btn-sm btn-outline-primary ml-3' %>
+        <% end %>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">

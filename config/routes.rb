@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :notifications, only: [:index]
+  resources :notifications, only: [:index] do
+    member do
+      patch :mark_as_read
+    end
+    collection do
+      patch :mark_all_as_read
+    end
+  end
   get "/.well-known/appspecific/com.chrome.devtools.json", to: proc { |env|
     [ 204, { "Content-Type" => "application/json" }, [] ]
   }
