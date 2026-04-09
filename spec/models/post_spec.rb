@@ -4,11 +4,9 @@ require 'rails_helper'
 # RSpec.describe: Define o que estamos testando (a classe Post)
 # type: :model informa ao RSpec que este é um teste de modelo
 RSpec.describe Post, type: :model do
-
   # "describe" agrupa testes relacionados a uma mesma funcionalidade.
   # Pense como um título de seção: "Aqui testamos as VALIDAÇÕES do Post"
   describe "validations" do
-
     # "let" define uma variável de teste que é criada apenas quando usada.
     # É "lazy" (preguiçosa): só executa quando o teste precisar dela.
     # Aqui criamos um usuário no banco de dados de teste usando a factory :user
@@ -58,7 +56,6 @@ RSpec.describe Post, type: :model do
   # Segundo grupo: Testamos as ASSOCIAÇÕES do modelo
   # --------------------------------------------------
   describe "associations" do
-
     # Verifica se a associação "belongs_to :user" está definida no modelo.
     # "reflect_on_association" é um método do Rails que inspeciona as associações
     # sem precisar criar objetos ou tocar no banco de dados.
@@ -68,6 +65,34 @@ RSpec.describe Post, type: :model do
 
       # ".macro" retorna o tipo da associação (:belongs_to, :has_many, etc.)
       expect(association.macro).to eq(:belongs_to)
+    end
+  end
+
+  # --------------------------------------------------
+  # Terceiro grupo: Testamos métodos de classe Ransack
+  # Métodos de classe são definidos com self.nome_do_metodo
+  # --------------------------------------------------
+  describe ".ransackable_attributes" do
+    it "returns the list of searchable attributes" do
+      expected_attributes = [ "created_at", "descricao", "id", "titulo", "updated_at", "user_id" ]
+      expect(described_class.ransackable_attributes).to eq(expected_attributes)
+    end
+
+    it "accepts an optional auth_object parameter" do
+      expect { described_class.ransackable_attributes(nil) }.not_to raise_error
+      expect { described_class.ransackable_attributes("admin") }.not_to raise_error
+    end
+  end
+
+  describe ".ransackable_associations" do
+    it "returns the list of searchable associations" do
+      expected_associations = [ "user" ]
+      expect(described_class.ransackable_associations).to eq(expected_associations)
+    end
+
+    it "accepts an optional auth_object parameter" do
+      expect { described_class.ransackable_associations(nil) }.not_to raise_error
+      expect { described_class.ransackable_associations("admin") }.not_to raise_error
     end
   end
 end
