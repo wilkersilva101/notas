@@ -64,6 +64,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "simplecov"
 end
 
 gem "devise", "~> 5.0"
@@ -73,5 +74,4 @@ gem "exception-track"
 gem "cancancan"
 gem "rolify"
 gem "sidekiq"
-
 gem "sidekiq-cron", "~> 2.3"

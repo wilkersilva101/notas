@@ -4,11 +4,9 @@ require 'rails_helper'
 # RSpec.describe: Define o que estamos testando (a classe User)
 # type: :model informa ao RSpec que este é um teste de modelo
 RSpec.describe User, type: :model do
-
   # "describe" agrupa testes relacionados a uma mesma funcionalidade.
   # Pense como um título de seção: "Aqui testamos as VALIDAÇÕES do User"
   describe "validations" do
-
     # "subject" define o objeto principal que será usado nos testes do bloco.
     # "build(:user)" usa o FactoryBot para criar um User na MEMÓRIA (sem salvar no banco).
     # Isso torna os testes mais rápidos, pois evita acesso desnecessário ao banco.
@@ -81,7 +79,6 @@ RSpec.describe User, type: :model do
   # Segundo grupo: Testamos as ASSOCIAÇÕES do modelo
   # --------------------------------------------------
   describe "associations" do
-
     # Verifica se a associação "has_many :posts" está definida no modelo.
     # Além disso, verificamos se o "dependent: :destroy" está configurado,
     # o que significa que ao deletar um User, todos os seus Posts são deletados também.
@@ -102,7 +99,6 @@ RSpec.describe User, type: :model do
   # do ciclo de vida do objeto (ex: before_save, after_initialize)
   # --------------------------------------------------
   describe "callbacks" do
-
     # O modelo User tem um `after_initialize :set_default_role`
     # Isso significa que ao criar um novo User (mesmo sem salvar),
     # o campo "role" já deve vir preenchido como "basic".
@@ -121,12 +117,75 @@ RSpec.describe User, type: :model do
   # constantes simbólicas no Ruby, tornando o código mais legível.
   # --------------------------------------------------
   describe "enums" do
-
     # O modelo define: enum :role, { basic: "basic", admin: "admin" }
     # Verificamos que os dois valores possíveis existem.
     it "allows assigning roles via Rolify" do
       user = create(:user)
       user.add_role(:admin)
+      expect(user.has_role?(:admin)).to be true
+    end
+  end
+
+  # --------------------------------------------------
+  # Quinto grupo: Testamos métodos de classe
+  # Métodos de classe são definidos com self.nome_do_metodo
+  # --------------------------------------------------
+  describe ".ransackable_attributes" do
+    # O método ransackable_attributes define quais campos podem ser
+    # usados nas buscas do Ransack (gem de filtros/searches)
+    it "returns the list of searchable attributes" do
+      expected_attributes = [ "created_at", "email", "id", "updated_at", "username" ]
+      expect(described_class.ransackable_attributes).to eq(expected_attributes)
+    end
+
+    it "accepts an optional auth_object parameter" do
+      # O método aceita um parâmetro opcional auth_object que é ignorado
+      # mas precisamos garantir que não quebra se for passado
+      expect { described_class.ransackable_attributes(nil) }.not_to raise_error
+      expect { described_class.ransackable_attributes("admin") }.not_to raise_error
+    end
+  end
+
+  # --------------------------------------------------
+  # Sexto grupo: Testamos métodos de instância
+  # Métodos de instância são chamados em objetos User específicos
+  # --------------------------------------------------
+  describe "#admin?" do
+    it "returns true when user has admin role" do
+      user = create(:user)
+      user.add_role(:admin)
+      expect(user.admin?).to be true
+    end
+
+    it "returns false when user does not have admin role" do
+      user = create(:user)
+      expect(user.admin?).to be false
+    end
+  end
+
+  describe "#set_default_role" do
+    before do
+      # Desabilita o callback after_initialize para isolar o teste do método
+      User.skip_callback(:initialize, :after, :set_default_role, if: :new_record?)
+    end
+
+    after do
+      # Reabilita o callback após os testes
+      User.set_callback(:initialize, :after, :set_default_role, if: :new_record?)
+    end
+
+    it "adds basic role when user has no roles" do
+      user = User.new(email: "test@example.com", password: "password")
+      expect(user.roles).to be_blank
+      user.send(:set_default_role)
+      expect(user.has_role?(:basic)).to be true
+    end
+
+    it "does not add basic role when user already has a role" do
+      user = User.new(email: "test@example.com", password: "password")
+      user.add_role(:admin)
+      user.send(:set_default_role)
+      expect(user.has_role?(:basic)).to be false
       expect(user.has_role?(:admin)).to be true
     end
   end
