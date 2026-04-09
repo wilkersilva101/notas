@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_31_185229) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_09_134150) do
   create_table "exception_tracks", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title"
     t.text "body", size: :medium
@@ -28,11 +28,19 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_31_185229) do
   end
 
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "message"
-    t.boolean "read"
+    t.string "target_type"
+    t.bigint "target_id"
+    t.string "object_type"
+    t.bigint "object_id"
+    t.boolean "read", default: false, null: false
+    t.text "metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.text "message"
+    t.index ["object_type", "object_id"], name: "index_notifications_on_object"
+    t.index ["read"], name: "index_notifications_on_read"
+    t.index ["target_type", "target_id"], name: "index_notifications_on_target"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
