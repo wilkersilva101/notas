@@ -75,3 +75,4 @@ gem "cancancan"
 gem "rolify"
 gem "sidekiq"
 gem "sidekiq-cron", "~> 2.3"
+gem "rubycritic", require: false
