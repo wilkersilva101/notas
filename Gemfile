@@ -53,6 +53,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
+  gem "yard"
 end
 
 group :development do
@@ -65,6 +66,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "simplecov"
+  gem "rails-controller-testing"
 end
 
 gem "devise", "~> 5.0"
@@ -76,3 +78,4 @@ gem "rolify"
 gem "sidekiq"
 gem "sidekiq-cron", "~> 2.3"
 gem "rubycritic", require: false
+gem "shoulda-matchers", "~> 7.0"
