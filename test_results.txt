@@ -1,0 +1,253 @@
+
+PostsController
+  filters
+    is expected to have :authenticate_user! as a before_action
+  routing
+    is expected to route GET /posts to/from {:action=>"index", :controller=>"posts"}
+    is expected to route GET /posts/1 to/from {:action=>"show", :id=>"1", :controller=>"posts"}
+    is expected to route GET /posts/new to/from {:action=>"new", :controller=>"posts"}
+    is expected to route GET /posts/1/edit to/from {:action=>"edit", :id=>"1", :controller=>"posts"}
+    is expected to route POST /posts to/from {:action=>"create", :controller=>"posts"}
+    is expected to route PATCH /posts/1 to/from {:action=>"update", :id=>"1", :controller=>"posts"}
+    is expected to route DELETE /posts/1 to/from {:action=>"destroy", :id=>"1", :controller=>"posts"}
+  GET #index
+    is expected to respond with 200
+    renders the index template
+    assigns @posts
+  GET #show
+    is expected to respond with 200
+    renders the show template
+    assigns the requested post to @post
+  GET #new
+    is expected to respond with 200
+    renders the new template
+    assigns a new post to @post
+  GET #edit
+    is expected to respond with 200
+    renders the edit template
+    assigns the requested post to @post
+  POST #create
+    com parâmetros válidos
+      cria um novo post
+      redireciona para o post criado
+      seta flash notice
+    com parâmetros inválidos
+      is expected to respond with 422
+      re-renders the new template
+  PATCH #update
+    com parâmetros válidos
+      is expected to redirect to "/posts/465"
+      seta flash notice
+    quando admin atualiza post de outro usuário
+      cria notificação para o dono do post
+  DELETE #destroy
+    deleta o post
+    redireciona para posts_path
+    quando admin deleta post de outro usuário
+      cria notificação para o dono
+  authorization
+    quando usuário tenta acessar post de outro
+      redireciona ao tentar editar post de outro usuário
+      redireciona ao tentar atualizar post de outro usuário
+      redireciona ao tentar deletar post de outro usuário
+      não altera o post de outro usuário
+      não deleta o post de outro usuário
+
+BroadcastAdminAnnouncementJob
+  #perform
+    creates a notification for each user in the database efficiently
+
+CleanupOldNotificationsJob
+  #perform
+    deletes read notifications older than 30 days
+    does not delete unread notifications regardless of age
+    does not delete recent read notifications
+
+ApplicationMailer
+  configuration
+    has default from address
+    uses mailer layout
+
+Ability
+  admin user
+    can manage all resources
+    cannot destroy itself
+    can destroy other users
+  basic user
+    cannot manage all resources
+    can read all except posts
+    can manage own posts
+    cannot manage other users posts
+    can read own posts
+    cannot read other users posts
+  guest user (nil)
+    cannot access anything
+
+Notification
+  associations
+    belongs to a user
+  callbacks
+    #set_default_read
+      sets read to false by default for new records
+      does not override read if already set
+  validations
+    is valid with valid attributes
+    is not valid without a user
+
+Post
+  validations
+    is valid with valid attributes
+    is not valid without a user
+    is not valid without a titulo
+  associations
+    belongs to a user
+  .ransackable_attributes
+    returns the list of searchable attributes
+    accepts an optional auth_object parameter
+  .ransackable_associations
+    returns the list of searchable associations
+    accepts an optional auth_object parameter
+
+Role
+  add some examples to (or delete) /home/wilker/Documentos/Projetos/notas/spec/models/role_spec.rb (PENDING: Not yet implemented)
+
+User
+  validations
+    is valid with valid attributes
+    is not valid without an email
+    is not valid with a duplicate email
+    is not valid without a password
+    is not valid with a duplicate username
+  associations
+    has many posts
+  callbacks
+    sets default role to basic after initialization or create
+  enums
+    allows assigning roles via Rolify
+  .ransackable_attributes
+    returns the list of searchable attributes
+    accepts an optional auth_object parameter
+  #admin?
+    returns true when user has admin role
+    returns false when user does not have admin role
+  #set_default_role
+    adds basic role when user has no roles
+    does not add basic role when user already has a role
+
+Admin::Announcements
+  GET /admin/announcements/new
+    as admin
+      returns a successful response
+    as regular user
+      redirects to root with alert
+    as guest
+      redirects to sign in
+  POST /admin/announcements
+    as admin
+      with valid message
+        enqueues BroadcastAdminAnnouncementJob
+        redirects to new announcement path with notice
+      with blank message
+        redirects with alert
+        does not enqueue job
+    as regular user
+      redirects to root with alert
+
+ApplicationController
+  layout selection
+    for devise controllers
+      uses devise layout for sign in
+    for regular controllers
+      uses application layout
+  CanCan::AccessDenied handling
+    when user tries to delete itself
+      redirects with specific message for self-deletion
+    when unauthorized user tries to access admin area
+      redirects to root with generic message
+    when user tries to access another user's post
+      redirects to root with generic access denied message
+  browser version check
+    allows modern browsers
+
+Notifications
+  GET /notifications
+    renders the index page successfully
+    does NOT mark notifications as read automatically
+  PATCH /notifications/:id/mark_as_read
+    marks a single notification as read
+  PATCH /notifications/mark_all_as_read
+    marks all notifications of the user as read
+
+Posts
+  GET /posts
+    returns a successful response
+  GET /posts/:id
+    returns a successful response for own post
+  GET /posts/new
+    returns a successful response
+  GET /posts/:id/edit
+    returns a successful response for own post
+  POST /posts
+    with valid parameters
+      creates a new post
+      redirects to the created post
+      returns JSON response when requested
+    with invalid parameters
+      does not create a new post
+      returns unprocessable entity status
+      returns JSON error response when requested
+  PATCH /posts/:id
+    with valid parameters
+      updates the post
+      redirects to the post
+      returns JSON response when requested
+    with invalid parameters
+      returns JSON error response when requested
+    when admin updates other user's post
+      creates a notification for the post owner
+  DELETE /posts/:id
+    destroys the post
+    redirects to posts index
+    returns JSON response when requested
+    when admin destroys other user's post
+      creates a notification for the post owner
+
+Users
+  GET /users
+    as admin
+      returns a successful response
+    as regular user
+      returns a successful response
+  GET /users/:id
+    returns a successful response
+  GET /users/:id/edit
+    as admin
+      returns a successful response
+  PATCH /users/:id
+    as admin
+      with valid parameters
+        updates the user
+        redirects to users index
+      with blank password
+        updates user without changing password
+      with invalid parameters
+        returns unprocessable entity status
+  DELETE /users/:id
+    as admin
+      destroys the user
+      redirects to users index
+    when admin tries to destroy itself
+      redirects with alert
+      does not destroy itself
+
+Pending: (Failures listed here are expected and do not affect your suite's status)
+
+  1) Role add some examples to (or delete) /home/wilker/Documentos/Projetos/notas/spec/models/role_spec.rb
+     # Not yet implemented
+     # ./spec/models/role_spec.rb:4
+
+Finished in 6.27 seconds (files took 3.07 seconds to load)
+129 examples, 0 failures, 1 pending
+
+Coverage report generated for RSpec to /home/wilker/Documentos/Projetos/notas/coverage.
+Line Coverage: 100.0% (162 / 162)

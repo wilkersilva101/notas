@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório de Regras de Negócio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      color: #1a1a2e;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .summary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    
+    .summary h2 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    
+    .summary p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .categoria {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    
+    .categoria-header {
+      background: #f8f9fa;
+      padding: 20px 25px;
+      border-bottom: 1px solid #e9ecef;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .categoria-header h2 {
+      color: #1a1a2e;
+      font-size: 1.3rem;
+    }
+    
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      min-width: 200px;
+    }
+    
+    .progress-bar {
+      height: 20px;
+      border-radius: 10px;
+      transition: width 0.3s ease;
+      flex: 1;
+    }
+    
+    .progress-text {
+      font-weight: 600;
+      color: #495057;
+      min-width: 80px;
+      text-align: right;
+    }
+    
+    .stats {
+      display: flex;
+      gap: 20px;
+      padding: 15px 25px;
+      background: #f8f9fa;
+    }
+    
+    .stat {
+      font-weight: 500;
+    }
+    
+    .stat.ok { color: #10b981; }
+    .stat.warning { color: #f59e0b; }
+    .stat.error { color: #ef4444; }
+    
+    .regras-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .regras-table th {
+      text-align: left;
+      padding: 15px 25px;
+      background: #f8f9fa;
+      color: #6c757d;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .regras-table td {
+      padding: 15px 25px;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    .regras-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .regra-nome {
+      color: #333;
+    }
+    
+    .status {
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+    
+    .status-ok {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    
+    .status-warning {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    
+    .status-error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      .categoria-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .progress-container {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📋 Relatório de Regras de Negócio</h1>
+      <div class="summary" style="background: #10b981; background: linear-gradient(135deg, #10b981 0%, #0c9467 100%);">
+        <h2>100.0%</h2>
+        <p>23 de 23 regras totalmente cobertas</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">Gerado em: 10/04/2026 19:15</p>
+      </div>
+    </header>
+    
+    <main>
+      <div class="categoria">
+  <div class="categoria-header">
+    <h2>Autenticação</h2>
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 100.0%; background: #10b981;"></div>
+      <span class="progress-text">100.0% (1/1)</span>
+    </div>
+  </div>
+  <div class="stats">
+    <span class="stat ok">✅ 1</span>
+    <span class="stat warning">⚠️ 0</span>
+    <span class="stat error">❌ 0</span>
+  </div>
+  <table class="regras-table">
+    <thead>
+      <tr>
+        <th>Regra</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td class="regra-nome">Usuário deve estar logado para acessar qualquer ação</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="categoria">
+  <div class="categoria-header">
+    <h2>Autorização (CanCanCan)</h2>
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 100.0%; background: #10b981;"></div>
+      <span class="progress-text">100.0% (5/5)</span>
+    </div>
+  </div>
+  <div class="stats">
+    <span class="stat ok">✅ 5</span>
+    <span class="stat warning">⚠️ 0</span>
+    <span class="stat error">❌ 0</span>
+  </div>
+  <table class="regras-table">
+    <thead>
+      <tr>
+        <th>Regra</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td class="regra-nome">Usuário só pode gerenciar seus próprios posts</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Admin pode gerenciar posts de qualquer usuário</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Usuário não pode editar post de outro</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Usuário não pode deletar post de outro</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Dados não são alterados quando acesso negado</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="categoria">
+  <div class="categoria-header">
+    <h2>CRUD - Create</h2>
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 100.0%; background: #10b981;"></div>
+      <span class="progress-text">100.0% (4/4)</span>
+    </div>
+  </div>
+  <div class="stats">
+    <span class="stat ok">✅ 4</span>
+    <span class="stat warning">⚠️ 0</span>
+    <span class="stat error">❌ 0</span>
+  </div>
+  <table class="regras-table">
+    <thead>
+      <tr>
+        <th>Regra</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td class="regra-nome">Post é criado com usuário logado como dono</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Parâmetros válidos: redirect para show + flash</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Parâmetros inválidos: re-render new + 422</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Associa `current_user` ao post</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="categoria">
+  <div class="categoria-header">
+    <h2>CRUD - Read</h2>
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 100.0%; background: #10b981;"></div>
+      <span class="progress-text">100.0% (2/2)</span>
+    </div>
+  </div>
+  <div class="stats">
+    <span class="stat ok">✅ 2</span>
+    <span class="stat warning">⚠️ 0</span>
+    <span class="stat error">❌ 0</span>
+  </div>
+  <table class="regras-table">
+    <thead>
+      <tr>
+        <th>Regra</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td class="regra-nome">Index lista posts (ransack + paginação)</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Show exibe post específico</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="categoria">
+  <div class="categoria-header">
+    <h2>CRUD - Update</h2>
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 100.0%; background: #10b981;"></div>
+      <span class="progress-text">100.0% (3/3)</span>
+    </div>
+  </div>
+  <div class="stats">
+    <span class="stat ok">✅ 3</span>
+    <span class="stat warning">⚠️ 0</span>
+    <span class="stat error">❌ 0</span>
+  </div>
+  <table class="regras-table">
+    <thead>
+      <tr>
+        <th>Regra</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td class="regra-nome">Atualiza dados do post</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Admin altera post de outro: cria notificação</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Admin recebe mensagem correta na notificação</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="categoria">
+  <div class="categoria-header">
+    <h2>CRUD - Destroy</h2>
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 100.0%; background: #10b981;"></div>
+      <span class="progress-text">100.0% (4/4)</span>
+    </div>
+  </div>
+  <div class="stats">
+    <span class="stat ok">✅ 4</span>
+    <span class="stat warning">⚠️ 0</span>
+    <span class="stat error">❌ 0</span>
+  </div>
+  <table class="regras-table">
+    <thead>
+      <tr>
+        <th>Regra</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td class="regra-nome">Deleta post do usuário</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Admin deleta post de outro: cria notificação</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Admin recebe mensagem correta na notificação</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Redirect para index após delete</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="categoria">
+  <div class="categoria-header">
+    <h2>Permissões de Parâmetros (Strong Parameters)</h2>
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 0%; background: #ef4444;"></div>
+      <span class="progress-text">0% (0/0)</span>
+    </div>
+  </div>
+  <div class="stats">
+    <span class="stat ok">✅ 0</span>
+    <span class="stat warning">⚠️ 0</span>
+    <span class="stat error">❌ 0</span>
+  </div>
+  <table class="regras-table">
+    <thead>
+      <tr>
+        <th>Regra</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>
+</div>
+<div class="categoria">
+  <div class="categoria-header">
+    <h2>Integrações</h2>
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 100.0%; background: #10b981;"></div>
+      <span class="progress-text">100.0% (4/4)</span>
+    </div>
+  </div>
+  <div class="stats">
+    <span class="stat ok">✅ 4</span>
+    <span class="stat warning">⚠️ 0</span>
+    <span class="stat error">❌ 0</span>
+  </div>
+  <table class="regras-table">
+    <thead>
+      <tr>
+        <th>Regra</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td class="regra-nome">Ransack funciona na listagem</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Kaminari pagina resultados</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">CanCanCan bloqueia acesso não autorizado</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+<tr>
+  <td class="regra-nome">Rolify identifica admin corretamente</td>
+  <td class="status status-ok">✅ Coberto</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    </main>
+    
+    <footer class="footer">
+      <p>PostsController - Aderência às Regras de Negócio</p>
+    </footer>
+  </div>
+</body>
+</html>
